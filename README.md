@@ -1,17 +1,17 @@
-# vecto-rs
+# vectorsearch-rs
 
 A tiny, fast **in-memory vector store** with cosine-similarity search, written
 in Rust and exposed to Python via [pyo3](https://pyo3.rs). It does one thing:
-keep a pile of equal-length vectors, each tagged with a string `id`, and return
-the `top_k` most similar ids to a query, with a parallel search path for large
-stores.
+keep a pile of equal-length vectors, each tagged with an integer `id`, and
+return the `top_k` most similar ids to a query, with a parallel search path for
+large stores.
 
 No index building, no config, no server. Just insert and search.
 
 ## Install
 
 ```bash
-pip install vectorstore
+pip install vectorsearch-rs
 ```
 
 To build from source you need a Rust toolchain and [maturin](https://www.maturin.rs):
@@ -24,17 +24,17 @@ maturin develop --release   # builds and installs into the active venv
 ## Usage
 
 ```python
-from vectorstore import Vectorstore, cosine_similarity
+from vectorsearch_rs import Vectorstore, cosine_similarity
 
 # Every vector must have this many dimensions.
 store = Vectorstore(vector_size=3)
 
-store.insert([1.0, 2.0, 3.0], "a")
-store.insert([1.0, 2.0, 4.0], "b")
-store.insert([9.0, 0.0, 0.0], "c")
+store.insert([1.0, 2.0, 3.0], 1)
+store.insert([1.0, 2.0, 4.0], 2)
+store.insert([9.0, 0.0, 0.0], 3)
 
 # Metadata lives on the Python side, keyed by the same ids.
-meta = {"a": {"title": "first"}, "b": {"title": "second"}, "c": {"title": "third"}}
+meta = {1: {"title": "first"}, 2: {"title": "second"}, 3: {"title": "third"}}
 
 # search returns a list of (score, id), most similar first.
 for score, id in store.search([1.0, 2.0, 3.5], top_k=2):
@@ -50,7 +50,7 @@ cosine_similarity([1.0, 0.0], [1.0, 0.0])  # -> 1.0
 You can also seed the store at construction time:
 
 ```python
-store = Vectorstore(3, [([1.0, 2.0, 3.0], "a"), ([0.0, 1.0, 0.0], "b")])
+store = Vectorstore(3, [([1.0, 2.0, 3.0], 1), ([0.0, 1.0, 0.0], 2)])
 ```
 
 To run the benchmarking script, you need to install the dev dependencies (numpy and scikit-learn)

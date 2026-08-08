@@ -1,9 +1,12 @@
 [package]
-name = "vectorstore"
+name = "vectorsearch-rs"
 version = "0.1.0"
 edition = "2024"
 
 [lib]
+# Must be a valid Python identifier: it is the importable module name, and it
+# has to match the #[pymodule] fn in src/lib.rs.
+name = "vectorsearch_rs"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]

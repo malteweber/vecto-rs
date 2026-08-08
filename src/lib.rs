@@ -214,7 +214,7 @@ fn cosine_similarity_py(vec1: Vec<f32>, vec2: Vec<f32>) -> PyResult<f32> {
 }
 
 #[pymodule]
-fn vectorstore(m: &Bound<'_, PyModule>) -> PyResult<()> {
+fn vectorsearch_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<PyVectorstore>()?;
     m.add_function(wrap_pyfunction!(cosine_similarity_py, m)?)?;
     Ok(())

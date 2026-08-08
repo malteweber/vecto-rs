@@ -1,14 +1,14 @@
-"""Type stubs for the `vectorstore` extension module."""
+"""Type stubs for the `vectorsearch_rs` extension module."""
 
 from typing import Optional
 
 SearchResult = tuple[float, int]
 
 class Vectorstore:
-    """An in-memory store of fixed-size vectors, each identified by a string id.
+    """An in-memory store of fixed-size vectors, each identified by an int id.
 
     The store holds only vectors and their ids. Any metadata associated with an
-    id is the caller's concern — keep it in a plain Python ``dict[str, ...]`` on
+    id is the caller's concern — keep it in a plain Python ``dict[int, ...]`` on
     the Python side and look it up by the ids that :meth:`search` returns.
     """
 

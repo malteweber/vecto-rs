@@ -9,7 +9,7 @@ import time
 import numpy as np
 from sklearn.neighbors import NearestNeighbors
 
-from vectorstore import Vectorstore
+from vectorsearch_rs import Vectorstore
 
 
 # --- Pure Python implementation ---

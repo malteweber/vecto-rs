@@ -3,7 +3,7 @@ requires = ["maturin>=1.7,<2.0"]
 build-backend = "maturin"
 
 [project]
-name = "vectorstore"
+name = "vectorsearch-rs"
 version = "0.1.0"
 description = "A tiny, fast in-memory vector store with cosine-similarity search, written in Rust."
 readme = "README.md"
@@ -23,7 +23,7 @@ classifiers = [
 dependencies = []
 
 [project.urls]
-Repository = "https://github.com/dev-weber/vectorstore"
+Repository = "https://github.com/malteweber/vecto-rs"
 
 # Only needed to run benchmark.py, which compares this store against the
 # numpy/sklearn baselines. The extension module itself has no runtime deps.
@@ -37,4 +37,4 @@ dev = [
 features = ["pyo3/extension-module"]
 # Ship the type stub alongside the compiled extension so editors and type
 # checkers understand the API.
-include = ["vectorstore.pyi"]
+include = ["vectorsearch_rs.pyi"]
