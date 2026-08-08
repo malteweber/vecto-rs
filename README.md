@@ -1,13 +1,12 @@
-# vectorstore
+# vecto-rs
 
 A tiny, fast **in-memory vector store** with cosine-similarity search, written
 in Rust and exposed to Python via [pyo3](https://pyo3.rs). It does one thing:
 keep a pile of equal-length vectors, each tagged with a string `id`, and return
-the `top_k` most similar ids to a query — with a parallel search path for large
+the `top_k` most similar ids to a query, with a parallel search path for large
 stores.
 
-No index building, no config, no server. Just insert and search. Metadata is
-deliberately *not* the store's job: keep it in a plain Python dict keyed by id.
+No index building, no config, no server. Just insert and search.
 
 ## Install
 
@@ -53,6 +52,8 @@ You can also seed the store at construction time:
 ```python
 store = Vectorstore(3, [([1.0, 2.0, 3.0], "a"), ([0.0, 1.0, 0.0], "b")])
 ```
+
+To run the benchmarking script, you need to install the dev dependencies (numpy and scikit-learn)
 
 ## Behaviour notes
 
