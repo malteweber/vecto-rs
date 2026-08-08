@@ -171,11 +171,14 @@ jobs:
         uses: actions/attest-build-provenance@v2
         with:
           subject-path: 'wheels-*/*'
+      # Each build job uploads its own wheels-* artifact; the publish action
+      # expects them all in a single dist/ directory.
+      - name: Collect distributions
+        run: mkdir -p dist && cp wheels-*/* dist/
+      # Publishes via PyPI trusted publishing (OIDC), using the `id-token:
+      # write` permission granted above — no API token secret involved.
       - name: Publish to PyPI
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
-        uses: PyO3/maturin-action@v1
-        env:
-          MATURIN_PYPI_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
+        uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          command: upload
-          args: --non-interactive --skip-existing wheels-*/*
+          skip-existing: true
