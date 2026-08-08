@@ -20,13 +20,18 @@ classifiers = [
     "Topic :: Scientific/Engineering",
     "Topic :: Software Development :: Libraries",
 ]
-dependencies = [
-    "numpy>=2.0.2",
-    "scikit-learn>=1.6.1",
-]
+dependencies = []
 
 [project.urls]
 Repository = "https://github.com/dev-weber/vectorstore"
+
+# Only needed to run benchmark.py, which compares this store against the
+# numpy/sklearn baselines. The extension module itself has no runtime deps.
+[dependency-groups]
+dev = [
+    "numpy>=2.0.2",
+    "scikit-learn>=1.6.1",
+]
 
 [tool.maturin]
 features = ["pyo3/extension-module"]
